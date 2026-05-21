@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    font-family: 'Inter', system-ui, sans-serif;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #080812;
+    color: #F1F5F9;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #080812; }
+  ::-webkit-scrollbar-thumb { background: #2A2A50; border-radius: 6px; }
+}
+
+@layer components {
+  .gradient-text {
+    background: linear-gradient(135deg, #A855F7, #22D3EE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-pink {
+    background: linear-gradient(135deg, #F472B6, #A855F7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #A855F7, #22D3EE);
+    color: white;
+    font-weight: 600;
+    padding: 0.6rem 1.75rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid #2A2A50;
+    color: #94A3B8;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: #A855F7; color: #F1F5F9; }
+
+  .card {
+    background: #16162E;
+    border: 1px solid #2A2A50;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  .input-field {
+    background: #111128;
+    border: 1px solid #2A2A50;
+    border-radius: 8px;
+    color: #F1F5F9;
+    padding: 0.6rem 1rem;
+    width: 100%;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .input-field:focus { border-color: #A855F7; }
+  .input-field::placeholder { color: #64748B; }
+
+  .chip {
+    border: 1px solid #2A2A50;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: transparent;
+    color: #94A3B8;
+  }
+
+  .chip:hover { border-color: #A855F7; color: #F1F5F9; }
+
+  .chip-active {
+    background: linear-gradient(135deg, #A855F7, #22D3EE);
+    border-color: transparent;
+    color: white;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748B;
+    margin-bottom: 0.5rem;
+  }
+}
