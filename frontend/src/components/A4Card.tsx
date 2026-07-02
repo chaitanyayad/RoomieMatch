@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+import { Leaf, Beef, Utensils } from 'lucide-react'
 import { UserProfile } from '../hooks/useAuth'
 import InitialsAvatar from './InitialsAvatar'
 import InterestChip from './InterestChip'
@@ -5,9 +7,14 @@ import InterestChip from './InterestChip'
 interface Props { user: UserProfile }
 
 const YEAR_LABEL: Record<number, string> = { 1: '1st Year', 2: '2nd Year', 3: '3rd Year', 4: '4th Year' }
-const VEG_LABEL: Record<string, string> = { veg: '🥦 Vegetarian', non_veg: '🍗 Non-Vegetarian', both: '🍽️ Both' }
+const VEG_LABEL: Record<string, { icon: typeof Leaf; text: string }> = {
+  veg: { icon: Leaf, text: 'Vegetarian' },
+  non_veg: { icon: Beef, text: 'Non-Vegetarian' },
+  both: { icon: Utensils, text: 'Both' },
+}
 
 export default function A4Card({ user }: Props) {
+  const diet = user.veg_nonveg ? VEG_LABEL[user.veg_nonveg] : null
   return (
     <div className="card overflow-hidden">
       {/* Gradient top bar */}
@@ -43,7 +50,14 @@ export default function A4Card({ user }: Props) {
           <Field label="Year" value={user.year ? YEAR_LABEL[user.year] : null} />
           <Field label="Branch" value={user.branch} />
           <Field label="Hometown" value={user.hometown} />
-          <Field label="Diet" value={user.veg_nonveg ? VEG_LABEL[user.veg_nonveg] : null} />
+          <Field
+            label="Diet"
+            value={diet && (
+              <span className="inline-flex items-center gap-1.5">
+                <diet.icon size={14} /> {diet.text}
+              </span>
+            )}
+          />
         </div>
 
         {/* Interests */}
@@ -87,7 +101,7 @@ export default function A4Card({ user }: Props) {
   )
 }
 
-function Field({ label, value }: { label: string; value: string | null | undefined }) {
+function Field({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div>
       <p className="section-label">{label}</p>

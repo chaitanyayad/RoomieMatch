@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 import api from '../api/client'
 import { UserProfile } from '../hooks/useAuth'
 import A4Card from '../components/A4Card'
@@ -31,8 +32,8 @@ export default function ProfileCardPage() {
     return (
       <div className="min-h-screen bg-base flex flex-col items-center justify-center gap-4">
         <p className="text-neon-pink text-lg font-semibold">{error || 'Profile not found.'}</p>
-        <button onClick={() => navigate(-1)} className="btn-ghost text-sm">
-          ← Go back
+        <button onClick={() => navigate(-1)} className="btn-ghost text-sm inline-flex items-center gap-1.5">
+          <ArrowLeft size={16} /> Go back
         </button>
       </div>
     )
@@ -45,7 +46,7 @@ export default function ProfileCardPage() {
           onClick={() => navigate(-1)}
           className="text-muted hover:text-bright text-sm font-medium mb-6 inline-flex items-center gap-1 transition-colors"
         >
-          ← Back to browse
+          <ArrowLeft size={16} /> Back to browse
         </button>
         <A4Card user={user} />
       </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ArrowRight, Leaf, Beef, Utensils } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import api from '../api/client'
 import AvatarUpload from '../components/AvatarUpload'
@@ -13,10 +14,10 @@ const INTERESTS = [
   'Badminton', 'Gym/Fitness', 'Art & Design', 'Movies', 'Travel',
   'Cooking', 'Reading', 'Photography', 'Dance', 'Other',
 ]
-const VEG_LABELS: Record<string, string> = {
-  veg: '🥦 Veg',
-  non_veg: '🍗 Non-Veg',
-  both: '🍽️ Both',
+const VEG_LABELS: Record<string, { icon: typeof Leaf; text: string }> = {
+  veg: { icon: Leaf, text: 'Veg' },
+  non_veg: { icon: Beef, text: 'Non-Veg' },
+  both: { icon: Utensils, text: 'Both' },
 }
 
 export default function Setup() {
@@ -111,10 +112,10 @@ export default function Setup() {
           <div>
             <p className="section-label">Diet *</p>
             <div className="flex gap-2 flex-wrap">
-              {Object.entries(VEG_LABELS).map(([val, label]) => (
+              {Object.entries(VEG_LABELS).map(([val, { icon: Icon, text }]) => (
                 <button key={val} type="button" onClick={() => setVegNonveg(val)}
-                  className={`chip ${vegNonveg === val ? 'chip-active' : ''}`}>
-                  {label}
+                  className={`chip inline-flex items-center gap-1.5 ${vegNonveg === val ? 'chip-active' : ''}`}>
+                  <Icon size={14} /> {text}
                 </button>
               ))}
             </div>
@@ -157,8 +158,8 @@ export default function Setup() {
 
           {error && <p className="text-neon-pink text-sm font-medium">{error}</p>}
 
-          <button type="submit" disabled={saving} className="btn-primary w-full text-sm">
-            {saving ? 'Saving...' : 'Find my roommates →'}
+          <button type="submit" disabled={saving} className="btn-primary w-full text-sm inline-flex items-center justify-center gap-1.5">
+            {saving ? 'Saving...' : <>Find my roommates <ArrowRight size={16} /></>}
           </button>
         </form>
       </div>

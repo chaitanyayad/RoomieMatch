@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ArrowLeft, Leaf, Beef, Utensils, Circle } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import api from '../api/client'
 import A4Card from '../components/A4Card'
@@ -14,10 +15,10 @@ const INTERESTS = [
   'Badminton', 'Gym/Fitness', 'Art & Design', 'Movies', 'Travel',
   'Cooking', 'Reading', 'Photography', 'Dance', 'Other',
 ]
-const VEG_LABELS: Record<string, string> = {
-  veg: '🥦 Veg',
-  non_veg: '🍗 Non-Veg',
-  both: '🍽️ Both',
+const VEG_LABELS: Record<string, { icon: typeof Leaf; text: string }> = {
+  veg: { icon: Leaf, text: 'Veg' },
+  non_veg: { icon: Beef, text: 'Non-Veg' },
+  both: { icon: Utensils, text: 'Both' },
 }
 
 export default function MyProfile() {
@@ -69,8 +70,8 @@ export default function MyProfile() {
         {/* Nav */}
         <div className="flex items-center justify-between mb-6">
           <button onClick={() => navigate('/browse')}
-            className="text-muted hover:text-bright text-sm font-medium transition-colors">
-            ← Browse
+            className="text-muted hover:text-bright text-sm font-medium transition-colors inline-flex items-center gap-1">
+            <ArrowLeft size={16} /> Browse
           </button>
           <div className="flex gap-3">
             {!editing ? (
@@ -97,8 +98,9 @@ export default function MyProfile() {
           <>
             {/* Looking toggle */}
             <div className="card px-5 py-3 mb-4 flex items-center justify-between">
-              <span className="text-sm font-medium text-bright">
-                {isLooking ? '🟢 Currently looking for a roommate' : '🔴 Not looking right now'}
+              <span className="text-sm font-medium text-bright inline-flex items-center gap-2">
+                <Circle size={10} className={isLooking ? 'fill-emerald-400 text-emerald-400' : 'fill-rose-400 text-rose-400'} />
+                {isLooking ? 'Currently looking for a roommate' : 'Not looking right now'}
               </span>
               <button
                 onClick={async () => {
@@ -143,10 +145,10 @@ export default function MyProfile() {
             <div>
               <p className="section-label">Diet</p>
               <div className="flex gap-2 flex-wrap">
-                {Object.entries(VEG_LABELS).map(([val, label]) => (
+                {Object.entries(VEG_LABELS).map(([val, { icon: Icon, text }]) => (
                   <button key={val} type="button" onClick={() => setVegNonveg(val)}
-                    className={`chip ${vegNonveg === val ? 'chip-active' : ''}`}>
-                    {label}
+                    className={`chip inline-flex items-center gap-1.5 ${vegNonveg === val ? 'chip-active' : ''}`}>
+                    <Icon size={14} /> {text}
                   </button>
                 ))}
               </div>

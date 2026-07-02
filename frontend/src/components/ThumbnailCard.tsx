@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { MapPin, Leaf, Beef, Utensils } from 'lucide-react'
 import { UserProfile } from '../hooks/useAuth'
 import InitialsAvatar from './InitialsAvatar'
 import InterestChip from './InterestChip'
@@ -9,10 +10,15 @@ interface Props {
 }
 
 const YEAR_LABEL: Record<number, string> = { 1: '1st yr', 2: '2nd yr', 3: '3rd yr', 4: '4th yr' }
-const VEG_LABEL: Record<string, string> = { veg: '🥦 Veg', non_veg: '🍗 Non-veg', both: '🍽️ Both' }
+const VEG_LABEL: Record<string, { icon: typeof Leaf; text: string }> = {
+  veg: { icon: Leaf, text: 'Veg' },
+  non_veg: { icon: Beef, text: 'Non-veg' },
+  both: { icon: Utensils, text: 'Both' },
+}
 
 export default function ThumbnailCard({ user, matchPercent }: Props) {
   const navigate = useNavigate()
+  const diet = user.veg_nonveg ? VEG_LABEL[user.veg_nonveg] : null
 
   return (
     <div
@@ -49,10 +55,12 @@ export default function ThumbnailCard({ user, matchPercent }: Props) {
       {/* Details */}
       <div className="space-y-1 mb-3">
         {user.hometown && (
-          <p className="text-xs text-muted">📍 {user.hometown}</p>
+          <p className="text-xs text-muted inline-flex items-center gap-1"><MapPin size={12} /> {user.hometown}</p>
         )}
-        {user.veg_nonveg && (
-          <p className="text-xs text-muted">{VEG_LABEL[user.veg_nonveg] ?? user.veg_nonveg}</p>
+        {diet && (
+          <p className="text-xs text-muted inline-flex items-center gap-1">
+            <diet.icon size={12} /> {diet.text}
+          </p>
         )}
       </div>
 

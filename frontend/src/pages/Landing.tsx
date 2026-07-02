@@ -1,8 +1,16 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google'
+import { Target, Gamepad2, Star, ClipboardList } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import api from '../api/client'
+
+const FEATURES = [
+  { icon: Target, text: 'Filter by year, branch & diet' },
+  { icon: Gamepad2, text: 'Match on shared interests' },
+  { icon: Star, text: 'Personalised recommendations' },
+  { icon: ClipboardList, text: 'Full profiles with contact info' },
+]
 
 export default function Landing() {
   const { token, login } = useAuth()
@@ -46,14 +54,9 @@ export default function Landing() {
           </p>
 
           <div className="space-y-3 mb-8">
-            {[
-              ['🎯', 'Filter by year, branch & diet'],
-              ['🎮', 'Match on shared interests'],
-              ['⭐', 'Personalised recommendations'],
-              ['📋', 'Full profiles with contact info'],
-            ].map(([icon, text]) => (
+            {FEATURES.map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-3">
-                <span className="text-lg">{icon}</span>
+                <Icon size={18} className="text-neon-purple flex-shrink-0" />
                 <span className="text-sm text-muted font-medium">{text}</span>
               </div>
             ))}

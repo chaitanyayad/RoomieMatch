@@ -82,7 +82,7 @@ VEG_WEIGHTS = [40, 45, 15]
 BIO_TEMPLATES = [
     "Looking for a chill roommate who respects study time and keeps things clean.",
     "Early riser, gym person. Need someone with a similar routine.",
-    "Night owl 🦉 — do my best work after midnight. Need a compatible roommate.",
+    "Night owl — do my best work after midnight. Need a compatible roommate.",
     "Into gaming and late night Maggi sessions. Let's vibe.",
     "Pretty easygoing, just need a clean space and decent sleep hours.",
     "Cricket on weekends, hustle on weekdays. Looking for someone similar.",
@@ -90,7 +90,7 @@ BIO_TEMPLATES = [
     "First year here, nervous but excited. Looking for a friendly roommate!",
     "Foodie who loves to cook. Will share food if you keep the kitchen clean.",
     "Prefer a quiet, focused environment. Study hard, sleep well.",
-    "Social butterfly 🦋 — love having people over sometimes. Hope that's okay!",
+    "Social butterfly — love having people over sometimes. Hope that's okay!",
     "Travel addict, always planning the next trip. Need someone adventurous.",
     "Bookworm looking for a like-minded roommate. Quiet evenings preferred.",
     "Fitness freak — early morning workouts are non-negotiable. Very clean habits.",
@@ -98,7 +98,7 @@ BIO_TEMPLATES = [
     "Introvert, keep to myself mostly. Very respectful of personal space.",
     "Final year so mostly offline and grinding. Need a focused roommate.",
     "Photographer — my room might have some equipment. Very organized though.",
-    "Mujhe sirf ek clean room chahiye aur ek decent roommate 😄",
+    "Mujhe sirf ek clean room chahiye aur ek decent roommate.",
     "From Rajasthan, first time living away from home. Adjustable and friendly!",
     "",  # some people leave bio blank
     "",
@@ -157,7 +157,7 @@ async def seed():
         await db.commit()
 
     await engine.dispose()
-    print("✅  Seeded 500 fake MUJ students.")
+    print("Seeded 500 fake MUJ students.")
 
 
 if __name__ == "__main__":

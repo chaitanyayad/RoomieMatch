@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChevronUp, ChevronDown, Leaf, Beef, Utensils } from 'lucide-react'
 import { FilterState } from '../pages/Browse'
 
 const BRANCHES = [
@@ -48,7 +49,7 @@ export default function FilterBar({ filters, onChange, onApply, onReset }: Props
             </span>
           )}
         </span>
-        <span className="text-muted text-xs">{open ? '▲' : '▼'}</span>
+        <span className="text-muted text-xs">{open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</span>
       </button>
 
       {open && (
@@ -84,10 +85,10 @@ export default function FilterBar({ filters, onChange, onApply, onReset }: Props
           <div>
             <p className="section-label">Diet</p>
             <div className="flex gap-2 flex-wrap">
-              {[{ val: 'veg', label: '🥦 Veg' }, { val: 'non_veg', label: '🍗 Non-Veg' }, { val: 'both', label: '🍽️ Both' }].map(({ val, label }) => (
+              {[{ val: 'veg', label: 'Veg', icon: Leaf }, { val: 'non_veg', label: 'Non-Veg', icon: Beef }, { val: 'both', label: 'Both', icon: Utensils }].map(({ val, label, icon: Icon }) => (
                 <button key={val} onClick={() => onChange({ ...filters, veg_nonveg: filters.veg_nonveg === val ? '' : val })}
-                  className={`chip ${filters.veg_nonveg === val ? 'chip-active' : ''}`}>
-                  {label}
+                  className={`chip inline-flex items-center gap-1.5 ${filters.veg_nonveg === val ? 'chip-active' : ''}`}>
+                  <Icon size={14} /> {label}
                 </button>
               ))}
             </div>

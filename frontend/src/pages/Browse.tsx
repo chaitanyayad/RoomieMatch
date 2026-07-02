@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Star, Search } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import api from '../api/client'
 import { UserProfile } from '../hooks/useAuth'
@@ -86,7 +87,7 @@ export default function Browse() {
         {/* Greeting */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-bright">
-            Hey {user?.name?.split(' ')[0]} 👋
+            Hey {user?.name?.split(' ')[0]}
           </h2>
           <p className="text-muted text-sm mt-1">
             {tab === 'browse' ? 'Browse all available roommates' : 'Your top matches based on your profile'}
@@ -107,13 +108,13 @@ export default function Browse() {
           </button>
           <button
             onClick={() => setTab('recommended')}
-            className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${
+            className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all inline-flex items-center gap-1.5 ${
               tab === 'recommended'
                 ? 'btn-primary'
                 : 'btn-ghost'
             }`}
           >
-            ⭐ Recommended
+            <Star size={14} /> Recommended
           </button>
         </div>
 
@@ -157,7 +158,7 @@ export default function Browse() {
 function EmptyState({ message }: { message: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-24 text-center">
-      <p className="text-5xl mb-4">🔍</p>
+      <Search size={40} className="mb-4 text-muted" />
       <p className="text-muted text-base max-w-sm">{message}</p>
     </div>
   )
